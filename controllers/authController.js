@@ -14,7 +14,8 @@ module.exports = {
             const newUser = await User.create({ email, password: hashedPassword });
             return res.status(201).json({ message: 'Usuário registrado com sucesso!', user: newUser });
         } catch (err) {
-            return res.status(500).json({ message: 'Erro ao registrar usuário.', error: err });
+            console.error('Error in register function:', err);
+            return res.status(500).json({ message: 'Erro ao registrar usuário.', error: err.message });
         }
     },
 
@@ -32,7 +33,8 @@ module.exports = {
             const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
             return res.json({ message: 'Login bem-sucedido.', token });
         } catch (err) {
-            return res.status(500).json({ message: 'Erro no login.', error: err });
+            console.error('Error in login function:', err); // Adicionado log detalhado
+            return res.status(500).json({ message: 'Erro no login.', error: err.message });
         }
     }
 };

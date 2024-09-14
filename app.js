@@ -1,3 +1,5 @@
+require('dotenv').config(); // Adicionado para carregar as variáveis de ambiente
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -30,6 +32,12 @@ sequelize.authenticate()
     .catch(err => {
         console.error('Erro ao conectar com o banco de dados:', err);
     });
+
+// Middleware de tratamento de erros
+app.use((err, req, res, next) => {
+    console.error('Erro interno do servidor:', err);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+});
 
 // Iniciar o servidor
 app.listen(PORT, () => {
