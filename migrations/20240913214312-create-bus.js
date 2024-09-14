@@ -21,6 +21,18 @@ module.exports = {
       availableSeats: {
         type: Sequelize.INTEGER
       },
+      origin: {
+        type: Sequelize.STRING
+      },
+      destination: {
+        type: Sequelize.STRING
+      },
+      journeyDate: {
+        type: Sequelize.DATE
+      },
+      duration: {
+        type: Sequelize.INTEGER // Duration in minutes
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
